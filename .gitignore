@@ -1,2 +1,4 @@
 **/node_modules
+fancy-db/data/*
+fancy-db/*.turtle
 Todo.plan

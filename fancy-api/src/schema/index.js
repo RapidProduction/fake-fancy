@@ -1,5 +1,5 @@
 const { makeExecutableSchema } = require('graphql-tools');
-const resolvers = require('../resolver');
+const resolvers = require('../resolvers');
 
 const typeDefs = `
   type Query {
@@ -11,14 +11,14 @@ const typeDefs = `
   }
 
   type User {
-    id: ID!
+    _id: ID!
     email: String!
     password: String!
     preference: UserPreference
   }
 
   type UserPreference {
-    id: ID!
+    _id: ID!
     localization_language: String!
     localization_time_zone: String!
     localization_currency: String!
@@ -28,17 +28,17 @@ const typeDefs = `
   }
 
   type Language {
-    id: ID!
+    _id: ID!
     value: String!
   }
 
   type TimeZone {
-    id: ID!
+    _id: ID!
     value: String!
   }
 
   type Currency {
-    id: ID!
+    _id: ID!
     value: String!
   }
 `;
