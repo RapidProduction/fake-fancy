@@ -1,0 +1,91 @@
+[{
+  "_id": 1,
+  "value": "CNY"
+}, {
+  "_id": 2,
+  "value": "EUR"
+}, {
+  "_id": 3,
+  "value": "CNY"
+}, {
+  "_id": 4,
+  "value": "IDR"
+}, {
+  "_id": 5,
+  "value": "THB"
+}, {
+  "_id": 6,
+  "value": "CNY"
+}, {
+  "_id": 7,
+  "value": "RUB"
+}, {
+  "_id": 8,
+  "value": "SEK"
+}, {
+  "_id": 9,
+  "value": "CNY"
+}, {
+  "_id": 10,
+  "value": "VND"
+}, {
+  "_id": 11,
+  "value": "CNY"
+}, {
+  "_id": 12,
+  "value": "PLN"
+}, {
+  "_id": 13,
+  "value": "EUR"
+}, {
+  "_id": 14,
+  "value": "IDR"
+}, {
+  "_id": 15,
+  "value": "IDR"
+}, {
+  "_id": 16,
+  "value": "IDR"
+}, {
+  "_id": 17,
+  "value": "RUB"
+}, {
+  "_id": 18,
+  "value": "CNY"
+}, {
+  "_id": 19,
+  "value": "USD"
+}, {
+  "_id": 20,
+  "value": "BRL"
+}, {
+  "_id": 21,
+  "value": "EUR"
+}, {
+  "_id": 22,
+  "value": "BRL"
+}, {
+  "_id": 23,
+  "value": "BRL"
+}, {
+  "_id": 24,
+  "value": "COP"
+}, {
+  "_id": 25,
+  "value": "MXN"
+}, {
+  "_id": 26,
+  "value": "SYP"
+}, {
+  "_id": 27,
+  "value": "SEK"
+}, {
+  "_id": 28,
+  "value": "BYR"
+}, {
+  "_id": 29,
+  "value": "JPY"
+}, {
+  "_id": 30,
+  "value": "YER"
+}]
