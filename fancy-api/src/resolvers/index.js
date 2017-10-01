@@ -1,11 +1,17 @@
+const authenticated = require('../libs/authentication');
+
 module.exports = {
   Query: {
-    me: () => ({
-      id: 0,
-      email: 'test@domain.com',
-      password: 'myHashPassword',
-      preference: null
-    }),
+    me: (root, data, { _, user }) => {
+      console.log(user);
+      authenticated(user);
+      return {
+        id: 0,
+        email: 'test@domain.com',
+        password: 'myHashPassword',
+        preference: null
+      }
+    },
     currencies: async (root, _, { mongoConnector: { Currency } }) => {
       return await Currency.find({}).toArray();
     },
@@ -15,21 +21,9 @@ module.exports = {
     timeZones: async (root, _, { mongoConnector: { TimeZone } }) => {
       return await TimeZone.find({}).toArray();
     },
-    // Own type resolvers
-    // User: () => null,
-    // UserPreference: () => null,
-    // Currency: async (root, { id }, { mongoConnector: { Currency } }) => {
-    //   return await Currency.find(id);
-    // },
-    // Language: async (root, { id }, { mongoConnector: { Language } }) => {
-    //   return await Language.find(id);
-    // },
-    // TimeZone: async (root, { id }, { mongoConnector: { TimeZone } }) => {
-    //   return await TimeZone.find(id);
-    // },
   },
   Mutation: {
-    createUser: async (root, data, { mongoConnector: { User }}) => {
+    signupUser: async (root, data, { mongoConnector: { User }}) => {
       const newUser = {
         email: data.authProvider.credential.email,
         password: data.authProvider.credential.password,
@@ -67,4 +61,16 @@ module.exports = {
       }
     },
   },
+  // Own type resolvers
+  // User: () => null,
+  // UserPreference: () => null,
+  // Currency: async (root, { id }, { mongoConnector: { Currency } }) => {
+  //   return await Currency.find(id);
+  // },
+  // Language: async (root, { id }, { mongoConnector: { Language } }) => {
+  //   return await Language.find(id);
+  // },
+  // TimeZone: async (root, { id }, { mongoConnector: { TimeZone } }) => {
+  //   return await TimeZone.find(id);
+  // },
 };

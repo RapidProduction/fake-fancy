@@ -11,7 +11,7 @@ const typeDefs = `
   }
 
   type Mutation {
-    createUser(authProvider: AuthProviderSignupData!): User
+    signupUser(authProvider: AuthProviderSignupData!): User
     signinUser(credential: AUTH_PROVIDER_EMAIL): SigninPayload!
   }
 
