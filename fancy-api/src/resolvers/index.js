@@ -87,30 +87,38 @@ module.exports = {
       return true;
     },
   },
-  User: {
-    preference: async (root, _, { mongoConnector: { User } }) => {
-      console.log("here");
-      console.log(root);
-      return null;
+  DisplayableUser: {
+    preference: async ({ _id, email }, _, { mongoConnector: { User } }) => {
+      const user = await User.findOne({ email });
+      return {
+        _id,
+        email,
+        privacy_profile_visibility: user.privacy_profile_visibility,
+        privacy_message: user.privacy_message,
+        content_category_list_enable: user.content_category_list_enable,
+      }
     },
   },
   UserPreference: {
-    localization_language: async (root, _, { mongoConnector: { User } }) => {
+    localization_language: async ({ _id, email }, _, { mongoConnector: { User } }) => {
+      const user = await User.findOne({ email });
       return {
-        _id: 0,
-        value: "test",
+        _id,
+        value: user.localization_language,
       }
     },
-    localization_time_zone: async (root, _, { mongoConnector: { User } }) => {
+    localization_time_zone: async ({ _id, email }, _, { mongoConnector: { User } }) => {
+      const user = await User.findOne({ email });
       return {
-        _id: 0,
-        value: "test",
+        _id,
+        value: user.localization_time_zone,
       }
     },
-    localization_currency: async (root, _, { mongoConnector: { User } }) => {
+    localization_currency: async ({ _id, email }, _, { mongoConnector: { User } }) => {
+      const user = await User.findOne({ email });
       return {
-        _id: 0,
-        value: "test",
+        _id,
+        value: user.localization_currency,
       }
     },
   },

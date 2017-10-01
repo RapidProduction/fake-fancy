@@ -17,17 +17,17 @@ const typeDefs = `
 
   type Language {
     _id: ID!
-    value: String!
+    value: String
   }
 
   type TimeZone {
     _id: ID!
-    value: String!
+    value: String
   }
 
   type Currency {
     _id: ID!
-    value: String!
+    value: String
   }
 
   enum PrivacyProfileMessage {

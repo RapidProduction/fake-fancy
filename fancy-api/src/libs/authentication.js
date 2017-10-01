@@ -1,6 +1,9 @@
 const jwt = require('jsonwebtoken');
 const expressJwt = require('express-jwt');
-const { tokenSecret } = require('../configs');
+const {
+  tokenSecret,
+  tokenExpiration,
+} = require('../configs');
 
 const authenticate = expressJwt({
   secret : tokenSecret,
@@ -14,7 +17,7 @@ const generateToken = (user) => {
       email: user.email,
     },
     tokenSecret,
-    { expiresIn: '15m' }
+    { expiresIn: tokenExpiration },
   );
 };
 
