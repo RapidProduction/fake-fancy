@@ -1,91 +1,61 @@
 [{
-  "_id": 1,
   "value": "Asia/Harbin"
 }, {
-  "_id": 2,
   "value": "Europe/Lisbon"
 }, {
-  "_id": 3,
   "value": "Asia/Colombo"
 }, {
-  "_id": 4,
   "value": "Europe/Stockholm"
 }, {
-  "_id": 5,
   "value": "Asia/Manila"
 }, {
-  "_id": 6,
   "value": "Asia/Shanghai"
 }, {
-  "_id": 7,
   "value": "Europe/Moscow"
 }, {
-  "_id": 8,
   "value": "Africa/Johannesburg"
 }, {
-  "_id": 9,
   "value": "Africa/Dar_es_Salaam"
 }, {
-  "_id": 10,
   "value": "Asia/Harbin"
 }, {
-  "_id": 11,
   "value": "America/Montevideo"
 }, {
-  "_id": 12,
   "value": "Asia/Chongqing"
 }, {
-  "_id": 13,
   "value": "Africa/Brazzaville"
 }, {
-  "_id": 14,
   "value": "America/Lima"
 }, {
-  "_id": 15,
   "value": "Europe/Ljubljana"
 }, {
-  "_id": 16,
   "value": "Europe/Oslo"
 }, {
-  "_id": 17,
   "value": "Asia/Bangkok"
 }, {
-  "_id": 18,
   "value": "Asia/Manila"
 }, {
-  "_id": 19,
   "value": "Asia/Chongqing"
 }, {
-  "_id": 20,
   "value": "Asia/Jakarta"
 }, {
-  "_id": 21,
   "value": "Europe/Tirane"
 }, {
-  "_id": 22,
   "value": "Asia/Shanghai"
 }, {
-  "_id": 23,
   "value": "Europe/Moscow"
 }, {
-  "_id": 24,
   "value": "Asia/Manila"
 }, {
-  "_id": 25,
   "value": "Europe/Prague"
 }, {
-  "_id": 26,
   "value": "Europe/Warsaw"
 }, {
-  "_id": 27,
   "value": "Asia/Manila"
 }, {
-  "_id": 28,
   "value": "Asia/Shanghai"
 }, {
-  "_id": 29,
   "value": "Asia/Jakarta"
 }, {
-  "_id": 30,
   "value": "Europe/Warsaw"
 }]

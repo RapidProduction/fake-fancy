@@ -1,91 +1,61 @@
 [{
-  "_id": 1,
   "value": "Icelandic"
 }, {
-  "_id": 2,
   "value": "Papiamento"
 }, {
-  "_id": 3,
   "value": "Swedish"
 }, {
-  "_id": 4,
   "value": "Swati"
 }, {
-  "_id": 5,
   "value": "Korean"
 }, {
-  "_id": 6,
   "value": "Yiddish"
 }, {
-  "_id": 7,
   "value": "Sotho"
 }, {
-  "_id": 8,
   "value": "English"
 }, {
-  "_id": 9,
   "value": "Malagasy"
 }, {
-  "_id": 10,
   "value": "Marathi"
 }, {
-  "_id": 11,
   "value": "Finnish"
 }, {
-  "_id": 12,
   "value": "Tsonga"
 }, {
-  "_id": 13,
   "value": "Moldovan"
 }, {
-  "_id": 14,
   "value": "Arabic"
 }, {
-  "_id": 15,
   "value": "Swahili"
 }, {
-  "_id": 16,
   "value": "Luxembourgish"
 }, {
-  "_id": 17,
   "value": "Belarusian"
 }, {
-  "_id": 18,
   "value": "Lao"
 }, {
-  "_id": 19,
   "value": "Dhivehi"
 }, {
-  "_id": 20,
   "value": "Lithuanian"
 }, {
-  "_id": 21,
   "value": "Romanian"
 }, {
-  "_id": 22,
   "value": "Malayalam"
 }, {
-  "_id": 23,
   "value": "Lithuanian"
 }, {
-  "_id": 24,
   "value": "Swahili"
 }, {
-  "_id": 25,
   "value": "Azeri"
 }, {
-  "_id": 26,
   "value": "Japanese"
 }, {
-  "_id": 27,
   "value": "Pashto"
 }, {
-  "_id": 28,
   "value": "Macedonian"
 }, {
-  "_id": 29,
   "value": "Hiri Motu"
 }, {
-  "_id": 30,
   "value": "Kashmiri"
 }]

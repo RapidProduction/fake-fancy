@@ -21,7 +21,14 @@ const generateToken = (user) => {
   );
 };
 
+const authenticationGuard = (user) => {
+  if(!user) {
+    throw new Error('Unauthorized');
+  }
+};
+
 module.exports = {
   authenticate,
+  authenticationGuard,
   generateToken,
 };

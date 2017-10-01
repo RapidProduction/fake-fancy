@@ -11,7 +11,7 @@ const connectMongoDb = async () => {
   };
 };
 
-const mongoId = (id) => new ObjectID(id);
+const mongoId = (id) => ObjectID(id);
 
 module.exports = {
   connectMongoDb,

@@ -10,9 +10,10 @@ const typeDefs = `
   }
 
   type Mutation {
-    signUpUser(credential: AUTH_PROVIDER_EMAIL!): User
-    signInUser(credential: AUTH_PROVIDER_EMAIL): SignInPayload!
+    signUpUser(credential: InputAuthProviderEmail!): User
+    signInUser(credential: InputAuthProviderEmail): SignInPayload!
     signOutUser: Boolean
+    updateUserPreference(preference: InputUserPreference): UserPreference
   }
 
   type Language {
@@ -38,12 +39,12 @@ const typeDefs = `
 
   type UserPreference {
     _id: ID!
-    localization_language: Language!
-    localization_time_zone: TimeZone!
-    localization_currency: Currency!
-    privacy_profile_visibility: Boolean
-    privacy_message: PrivacyProfileMessage
-    content_category_list_enable: Boolean
+    localizationLanguage: Language
+    localizationTimeZone: TimeZone
+    localizationCurrency: Currency
+    privacyProfileVisibility: Boolean
+    privacyMessage: PrivacyProfileMessage
+    contentCategoryListEnable: Boolean
   }
 
   type DisplayableUser {
@@ -64,13 +65,18 @@ const typeDefs = `
     user: User!
   }
 
-  input AuthProviderSignUpData {
-    credential: AUTH_PROVIDER_EMAIL
-  }
-
-  input AUTH_PROVIDER_EMAIL {
+  input InputAuthProviderEmail {
     email: String!
     password: String!
+  }
+
+  input InputUserPreference {
+    localizationLanguageId: ID
+    localizationTimeZoneId: ID
+    localizationCurrencyId: ID
+    privacyProfileVisibility: Boolean
+    privacyMessage: PrivacyProfileMessage
+    contentCategoryListEnable: Boolean
   }
 `;
 

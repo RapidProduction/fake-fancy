@@ -2,15 +2,16 @@ const bcrypt = require('bcrypt-nodejs');
 const passport = require('passport');
 const {
   authenticate,
+  authenticationGuard,
   generateToken,
 } = require('../libs/authentication');
+
+const { mongoId } = require('../connectors/mongo-connector');
 
 module.exports = {
   Query: {
     me: (root, data, { user, request }) => {
-      if(!user) {
-        throw new Error('Unauthorized');
-      }
+      authenticationGuard(user);
       return {
         _id: user._id,
         email: user.email,
@@ -27,7 +28,10 @@ module.exports = {
     },
   },
   Mutation: {
-    signUpUser: async (root, data, { mongoConnector: { User } }) => {
+    signUpUser: async (
+      root,
+      data,
+      { mongoConnector: { User, Language, TimeZone, Currency } }) => {
       const anotherUser = await User.findOne({ email: data.credential.email });
       if(anotherUser) {
         throw new Error('Username is used by another user');
@@ -36,12 +40,12 @@ module.exports = {
       const newUser = {
         email: data.credential.email,
         password: bcrypt.hashSync(data.credential.password),
-        localization_language: null,
-        localization_time_zone: null,
-        localization_currency: null,
-        privacy_profile_visibility: true,
-        privacy_message: 'Follower',
-        content_category_list_enable: true,
+        localizationLanguageId: (await Language.findOne())._id,
+        localizationTimeZoneId: (await TimeZone.findOne())._id,
+        localizationCurrencyId: (await Currency.findOne())._id,
+        privacyProfileVisibility: true,
+        privacyMessage: 'Follower',
+        contentCategoryListEnable: true,
       }
       const response = await User.insert(newUser);
       const userId = response.insertedIds[0];
@@ -53,12 +57,9 @@ module.exports = {
           password: newUser.password,
           preference: {
             _id: userId,
-            localization_language: newUser.localization_language,
-            localization_currency: newUser.localization_currency,
-            localization_time_zone: newUser.localization_time_zone,
-            privacy_profile_visibility: newUser.privacy_profile_visibility,
-            privacy_message: newUser.privacy_message,
-            content_category_list_enable: newUser.content_category_list_enable,
+            privacyProfileVisibility: newUser.privacyProfileVisibility,
+            privacyMessage: newUser.privacyMessage,
+            contentCategoryListEnable: newUser.contentCategoryListEnable,
           },
         },
       );
@@ -86,40 +87,67 @@ module.exports = {
       request.logout();
       return true;
     },
+    updateUserPreference: async (root, data, { mongoConnector: { User }, user }) => {
+      authenticationGuard(user);
+      const updatedUserPreference = await User.updateOne(
+        { _id: mongoId(user._id) },
+        { $set: data.preference },
+      );
+      return Object.assign(
+        {
+          _id: user._id,
+          email: user.email
+        },
+        data.preference,
+      );
+    },
   },
   DisplayableUser: {
     preference: async ({ _id, email }, _, { mongoConnector: { User } }) => {
-      const user = await User.findOne({ email });
+      const user = await User.findOne({ _id: mongoId(_id) });
       return {
         _id,
         email,
-        privacy_profile_visibility: user.privacy_profile_visibility,
-        privacy_message: user.privacy_message,
-        content_category_list_enable: user.content_category_list_enable,
+        localizationLanguageId: user.localizationLanguageId,
+        localizationCurrencyId: user.localizationCurrencyId,
+        localizationTimeZoneId: user.localizationTimeZoneId,
+        privacyProfileVisibility: user.privacyProfileVisibility,
+        privacyMessage: user.privacyMessage,
+        contentCategoryListEnable: user.contentCategoryListEnable,
       }
     },
   },
   UserPreference: {
-    localization_language: async ({ _id, email }, _, { mongoConnector: { User } }) => {
+    localizationLanguage: async ({ _id, email }, _, { mongoConnector: { User } }) => {
       const user = await User.findOne({ email });
-      return {
-        _id,
-        value: user.localization_language,
-      }
+      return { _id: user.localizationLanguageId };
     },
-    localization_time_zone: async ({ _id, email }, _, { mongoConnector: { User } }) => {
+    localizationTimeZone: async ({ _id, email }, _, { mongoConnector: { User } }) => {
       const user = await User.findOne({ email });
-      return {
-        _id,
-        value: user.localization_time_zone,
-      }
+      return { _id: user.localizationTimeZoneId };
     },
-    localization_currency: async ({ _id, email }, _, { mongoConnector: { User } }) => {
+    localizationCurrency: async ({ _id, email }, _, { mongoConnector: { User } }) => {
       const user = await User.findOne({ email });
-      return {
-        _id,
-        value: user.localization_currency,
-      }
+      return { _id: user.localizationCurrencyId };
+    },
+  },
+  Language: {
+    value: async ({ _id }, _, { mongoConnector: { Language } }) => {
+      const language = await Language.findOne({ _id: mongoId(_id) });
+      console.log(language);
+      return language.value;
+    },
+  },
+  Currency: {
+    value: async ({ _id }, _, { mongoConnector: { Currency } }) => {
+      const currency = await Currency.findOne({ _id: mongoId(_id) });
+      return currency.value;
+    },
+  },
+  TimeZone: {
+    value: async ({ _id }, _, { mongoConnector: { TimeZone } }) => {
+      const timeZone = await TimeZone.findOne({ _id: mongoId(_id) });
+      return timeZone.value;
     },
   },
 };

@@ -27,7 +27,7 @@ const startServer = async () => {
     // TODO: This should find by Id not email, we assume email is unique
     let user = undefined;
     if(request.user) {
-      user = await mongoConnector.User.findOne({ email: request.user.email });
+      user = await mongoConnector.User.findOne({ _id: mongoId(request.user.id) });
     }
     return {
       context: { mongoConnector, user, request },
