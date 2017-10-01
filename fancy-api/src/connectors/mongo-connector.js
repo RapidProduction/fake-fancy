@@ -1,7 +1,7 @@
-const { MongoClient } = require('mongodb');
+const { MongoClient, ObjectID } = require('mongodb');
 const { databaseEndpoint } = require('../configs');
 
-module.exports = async () => {
+const connectMongoDb = async () => {
   const db = await MongoClient.connect(databaseEndpoint);
   return {
     Currency: db.collection('currencies'),
@@ -10,3 +10,10 @@ module.exports = async () => {
     User: db.collection('user'),
   };
 };
+
+const mongoId = (id) => new ObjectID(id);
+
+module.exports = {
+  connectMongoDb,
+  mongoId,
+}

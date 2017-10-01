@@ -1,18 +1,20 @@
 const bcrypt = require('bcrypt-nodejs');
 const passport = require('passport');
-const { authenticated } = require('../libs/authentication');
+const {
+  authenticate,
+  generateToken,
+} = require('../libs/authentication');
 
 module.exports = {
   Query: {
-    me: (root, data, { _, user }) => {
-      console.log(user);
-      authenticated(user);
-      return {
-        id: 0,
-        email: 'test@domain.com',
-        password: 'myHashPassword',
-        preference: null
+    me: (root, data, { user, request }) => {
+      if(!user) {
+        throw new Error('Unauthorized');
       }
+      return {
+        _id: user._id,
+        email: user.email,
+      };
     },
     currencies: async (root, _, { mongoConnector: { Currency } }) => {
       return await Currency.find({}).toArray();
@@ -25,7 +27,7 @@ module.exports = {
     },
   },
   Mutation: {
-    signUpUser: async (root, data, { mongoConnector: { User }}) => {
+    signUpUser: async (root, data, { mongoConnector: { User } }) => {
       const anotherUser = await User.findOne({ email: data.credential.email });
       if(anotherUser) {
         throw new Error('Username is used by another user');
@@ -61,39 +63,55 @@ module.exports = {
         },
       );
     },
-    signInUser: async (root, data, { request, response }) => {
+    signInUser: async (root, data, { request }) => {
       // We need to assign this body again due to passport does not support GraphQL params
       request.body = Object.assign({}, request.body, {
         username: data.credential.email,
         password: data.credential.password,
       });
 
-      user = new Promise((resolve, reject) => {
+      user = await new Promise((resolve, reject) => {
         passport.authenticate('local', (error, user, information) => {
           if(!user) {
             reject('Incorrect username or password');
           }
           resolve(user);
-        })(request, response, () => {});
+        })(request);
       }).catch((error) => {
         throw new Error(error);
       });
-      return { authenticatedToken: `token-${user.email}`, user };
+      return { authenticatedToken: generateToken(user), user };
     },
     signOutUser: async (root, data, { request }) => {
       request.logout();
       return true;
     },
   },
-  User: () => null,
-  UserPreference: () => null,
-  Currency: async (root, { id }, { mongoConnector: { Currency } }) => {
-    return await Currency.find(id);
+  User: {
+    preference: async (root, _, { mongoConnector: { User } }) => {
+      console.log("here");
+      console.log(root);
+      return null;
+    },
   },
-  Language: async (root, { id }, { mongoConnector: { Language } }) => {
-    return await Language.find(id);
-  },
-  TimeZone: async (root, { id }, { mongoConnector: { TimeZone } }) => {
-    return await TimeZone.find(id);
+  UserPreference: {
+    localization_language: async (root, _, { mongoConnector: { User } }) => {
+      return {
+        _id: 0,
+        value: "test",
+      }
+    },
+    localization_time_zone: async (root, _, { mongoConnector: { User } }) => {
+      return {
+        _id: 0,
+        value: "test",
+      }
+    },
+    localization_currency: async (root, _, { mongoConnector: { User } }) => {
+      return {
+        _id: 0,
+        value: "test",
+      }
+    },
   },
 };

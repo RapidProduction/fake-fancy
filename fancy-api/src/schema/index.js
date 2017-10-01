@@ -3,8 +3,7 @@ const resolvers = require('../resolvers');
 
 const typeDefs = `
   type Query {
-    me: User!
-    preference: UserPreference!
+    me: DisplayableUser!
     languages: [Language]!
     timeZones: [TimeZone]!
     currencies: [Currency]!
@@ -45,6 +44,12 @@ const typeDefs = `
     privacy_profile_visibility: Boolean
     privacy_message: PrivacyProfileMessage
     content_category_list_enable: Boolean
+  }
+
+  type DisplayableUser {
+    _id: ID!
+    email: String!
+    preference: UserPreference
   }
 
   type User {
