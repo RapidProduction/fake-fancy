@@ -11,8 +11,9 @@ const typeDefs = `
   }
 
   type Mutation {
-    signupUser(authProvider: AuthProviderSignupData!): User
-    signinUser(credential: AUTH_PROVIDER_EMAIL): SigninPayload!
+    signUpUser(credential: AUTH_PROVIDER_EMAIL!): User
+    signInUser(credential: AUTH_PROVIDER_EMAIL): SignInPayload!
+    signOutUser: Boolean
   }
 
   type Language {
@@ -53,12 +54,12 @@ const typeDefs = `
     preference: UserPreference
   }
 
-  type SigninPayload {
+  type SignInPayload {
     authenticatedToken: String!
     user: User!
   }
 
-  input AuthProviderSignupData {
+  input AuthProviderSignUpData {
     credential: AUTH_PROVIDER_EMAIL
   }
 
