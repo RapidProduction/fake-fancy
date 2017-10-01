@@ -3,11 +3,54 @@ const resolvers = require('../resolvers');
 
 const typeDefs = `
   type Query {
-    me: User!
-    preference: UserPreference!
+    me: DisplayableUser!
     languages: [Language]!
     timeZones: [TimeZone]!
     currencies: [Currency]!
+  }
+
+  type Mutation {
+    signUpUser(credential: InputAuthProviderEmail!): User
+    signInUser(credential: InputAuthProviderEmail): SignInPayload!
+    signOutUser: Boolean
+    updateUserPreference(preference: InputUserPreference): UserPreference
+  }
+
+  type Language {
+    _id: ID!
+    value: String
+  }
+
+  type TimeZone {
+    _id: ID!
+    value: String
+  }
+
+  type Currency {
+    _id: ID!
+    value: String
+  }
+
+  enum PrivacyProfileMessage {
+    Everyone
+    Follower
+    None
+  }
+
+  type UserPreference {
+    _id: ID!
+    localizationLanguage: Language
+    localizationTimeZone: TimeZone
+    localizationCurrency: Currency
+    privacyProfileVisibility: Boolean
+    privacyMessage: PrivacyProfileMessage
+    contentCategoryListEnable: Boolean
+  }
+
+  type DisplayableUser {
+    _id: ID!
+    email: String!
+    preference: UserPreference
   }
 
   type User {
@@ -17,29 +60,23 @@ const typeDefs = `
     preference: UserPreference
   }
 
-  type UserPreference {
-    _id: ID!
-    localization_language: String!
-    localization_time_zone: String!
-    localization_currency: String!
-    privacy_profile_visibility: Boolean
-    privacy_message: String!
-    content_category_list_enable: Boolean
+  type SignInPayload {
+    authenticatedToken: String!
+    user: User!
   }
 
-  type Language {
-    _id: ID!
-    value: String!
+  input InputAuthProviderEmail {
+    email: String!
+    password: String!
   }
 
-  type TimeZone {
-    _id: ID!
-    value: String!
-  }
-
-  type Currency {
-    _id: ID!
-    value: String!
+  input InputUserPreference {
+    localizationLanguageId: ID
+    localizationTimeZoneId: ID
+    localizationCurrencyId: ID
+    privacyProfileVisibility: Boolean
+    privacyMessage: PrivacyProfileMessage
+    contentCategoryListEnable: Boolean
   }
 `;
 

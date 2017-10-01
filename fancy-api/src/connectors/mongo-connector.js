@@ -1,8 +1,8 @@
-const { MongoClient } = require('mongodb');
-const MONGO_URL = 'mongodb://localhost:27017/fancy';
+const { MongoClient, ObjectID } = require('mongodb');
+const { databaseEndpoint } = require('../configs');
 
-module.exports = async () => {
-  const db = await MongoClient.connect(MONGO_URL);
+const connectMongoDb = async () => {
+  const db = await MongoClient.connect(databaseEndpoint);
   return {
     Currency: db.collection('currencies'),
     Language: db.collection('languages'),
@@ -10,3 +10,10 @@ module.exports = async () => {
     User: db.collection('user'),
   };
 };
+
+const mongoId = (id) => ObjectID(id);
+
+module.exports = {
+  connectMongoDb,
+  mongoId,
+}
