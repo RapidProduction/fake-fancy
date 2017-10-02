@@ -3,8 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "prop-types": "^15.6.0",
     "react": "^16.0.0",
-    "react-dom": "^16.0.0"
+    "react-dom": "^16.0.0",
+    "react-redux": "^5.0.6",
+    "recompose": "^0.25.1",
+    "redux": "^3.7.2",
+    "redux-form": "^7.0.4"
   },
   "devDependencies": {
     "react-scripts": "1.0.14"
