@@ -1,18 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import {
-  applyMiddleware,
-  createStore,
-} from 'redux';
+import { createStore} from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import { createEpicMiddleware } from 'redux-observable';
 
 import App from './App';
 import './index.css';
 import registerServiceWorker from './registerServiceWorker';
 
-const store = createStore();
+const store = createStore(composeWithDevTools());
 ReactDOM.render(
   <Provider store={store}>
     <App />
