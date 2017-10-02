@@ -1,9 +1,23 @@
 import * as React from 'react';
 
-const UserPreferencePage = () => (
+const UserPreference = ({
+  // userPreference: {
+  //   email,
+  //   preference: {
+  //     localizationLanguage: {
+  //       value: localizationValue,
+  //     },
+  //   },
+  // },
+  userPreference,
+}) => (
   <div>
     <div>
       Edit Preferences
+      {
+        (!userPreference.loading && !userPreference.error) ?
+        userPreference.me.email : null
+      }
     </div>
     <div>
       <div>Localization</div>
@@ -51,4 +65,4 @@ const UserPreferencePage = () => (
   </div>
 );
 
-export default UserPreferencePage;
+export default UserPreference;

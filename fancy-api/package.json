@@ -1,12 +1,13 @@
 {
   "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js"
+    "start": "mongod --dbpath ../fancy-db/data & node index.js",
+    "dev": "mongod --dbpath ../fancy-db/data & nodemon index.js"
   },
   "dependencies": {
     "apollo-server-express": "^1.1.2",
     "bcrypt-nodejs": "^0.0.3",
     "body-parser": "^1.18.2",
+    "cors": "^2.8.4",
     "express": "^4.16.1",
     "express-jwt": "^5.3.0",
     "express-session": "^1.15.6",

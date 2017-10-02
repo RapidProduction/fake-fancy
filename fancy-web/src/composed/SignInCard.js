@@ -4,7 +4,7 @@ import {
   withProps,
 } from 'recompose';
 
-import AuthenticationCard from '../components/AuthenticationCard/AuthenticationCard';
+import AuthenticationCard from '../components/AuthenticationCard';
 
 export default compose(
   withProps({
