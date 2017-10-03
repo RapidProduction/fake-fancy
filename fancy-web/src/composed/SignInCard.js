@@ -14,7 +14,5 @@ export default compose(
     titleGooglePlus: 'Google+',
     titleTwitter: 'Twitter',
   }),
-  reduxForm({
-    form: 'signIn',
-  }),
+  reduxForm({ form: 'signIn' }),
 )(AuthenticationCard);

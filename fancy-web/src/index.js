@@ -28,7 +28,7 @@ networkInterface.use([{
     }
     // get the authentication token from local storage if it exists
     // const token = localStorage.getItem('token');
-    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjU5ZDEyMzBkMjRhMzI2ZjRmMmI5OGJiNyIsImVtYWlsIjoibWF4N0Bkb21haW4uY29tIiwiaWF0IjoxNTA3MDUxNjM5LCJleHAiOjE1MDcwNTUyMzl9.5OcdXq7jTuZSuej1XIUWgOHMqr_5w4eUCKXN9b7wf3E';
+    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjU5ZDEyMzUzMWI0NTBlZjU1NDY2OWVhZCIsImVtYWlsIjoibWF4OEBkb21haW4uY29tIiwiaWF0IjoxNTA3MDUzMjQyLCJleHAiOjE1MDcwNTY4NDJ9.fwKbrfZh4Mskx3W6AgLKBUN2tzQyK9zlQA0_xD8Hxec';
     request.options.headers.authorization = token ? `Bearer ${token}` : null;
     next();
   }

@@ -28,7 +28,7 @@ const UserPreference = ({
               <Field name='localizationLanguage' component='select'>
                 {
                   languages.map(({_id, value}) =>
-                    <option value={_id} key={_id}>
+                    <option key={_id} value={_id}>
                       {value}
                     </option>
                   )
@@ -41,7 +41,7 @@ const UserPreference = ({
               <Field name='localizationTimeZone' component='select'>
                 {
                   timeZones.map(({_id, value}) =>
-                    <option value={_id} key={_id}>
+                    <option key={_id} value={_id}>
                       {value}
                     </option>
                   )
@@ -53,7 +53,7 @@ const UserPreference = ({
               <Field name='localizationCurrency' component='select'>
                 {
                   currencies.map(({_id, value}) =>
-                    <option value={_id} key={_id}>
+                    <option key={_id} value={_id}>
                       {value}
                     </option>
                   )
@@ -91,7 +91,7 @@ const UserPreference = ({
               <div>Control who can send you messages</div>
               <div>
                 <Field
-                  name='privacyMessages'
+                  name='privacyMessage'
                   component='input'
                   type='radio'
                   value='Everyone'
@@ -100,7 +100,7 @@ const UserPreference = ({
               </div>
               <div>
                 <Field
-                  name='privacyMessages'
+                  name='privacyMessage'
                   component='input'
                   type='radio'
                   value='Follower'
@@ -109,7 +109,7 @@ const UserPreference = ({
               </div>
               <div>
                 <Field
-                  name='privacyMessages'
+                  name='privacyMessage'
                   component='input'
                   type='radio'
                   value='None'
