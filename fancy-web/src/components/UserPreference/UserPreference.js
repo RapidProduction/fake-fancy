@@ -7,7 +7,7 @@ const UserPreference = ({
   // Form
   pristine, submitting,
   // Events
-  handleSubmit,
+  handleSubmit, savePreference,
  }) => {
   if(!(userPreference.loading || userPreference.error)) {
     const {
@@ -148,7 +148,10 @@ const UserPreference = ({
               </div>
             </div>
           </div>
-          <button type='submit' disabled={pristine || submitting}>
+          <button
+            type='submit'
+            disabled={pristine || submitting}
+          >
             Save Preferences
           </button>
         </form>

@@ -38,11 +38,40 @@ const USER_PREFERENCE_QUERY = gql`
       value
     }
   }
-`
+`;
+
+const USER_PREFERENCE_UPDATE = gql`
+  mutation UpdateUserPreference(
+      $localizationLanguageId: ID,
+      $localizationTimeZoneId: ID,
+      $localizationCurrencyId: ID,
+      $privacyProfileVisibility: Boolean,
+      $privacyMessage: PrivacyProfileMessage,
+      $contentCategoryListEnable: Boolean,
+    ){
+    updateUserPreference(
+      preference:{
+        localizationLanguageId: $localizationLanguageId
+        localizationTimeZoneId: $localizationTimeZoneId
+        localizationCurrencyId: $localizationCurrencyId
+        privacyProfileVisibility: $privacyProfileVisibility,
+        privacyMessage: $privacyMessage,
+        contentCategoryListEnable: $contentCategoryListEnable,
+      }
+    ) {
+      _id
+    }
+  }
+`;
+
 export default compose(
   graphql(
     USER_PREFERENCE_QUERY,
     { name: 'userPreference' },
+  ),
+  graphql(
+    USER_PREFERENCE_UPDATE,
+    { name: 'updateUserPreference' },
   ),
   mapProps(props => {
     if(!props.userPreference.loading && !props.userPreference.error) {
@@ -58,7 +87,6 @@ export default compose(
           }
         }
       } = props.userPreference;
-      console.log(localizationLanguage.value);
       return {
         ...props,
         initialValues: {
@@ -74,8 +102,17 @@ export default compose(
     return props;
   }),
   withHandlers({
-    handleSubmit: props => {
-      console.log(props);
+    onSubmit: props => formValues => {
+      props.updateUserPreference({
+        variables: {
+          contentCategoryListEnable: formValues.contentCategoryList === 'Enable' ? true : false,
+          localizationCurrencyId: formValues.localizationCurrency,
+          localizationLanguageId: formValues.localizationLanguage,
+          localizationTimeZoneId: formValues.localizationTimeZone,
+          privacyMessage: formValues.privacyMessage,
+          privacyProfileVisibility: formValues.privacyProfileVisibility === 'Everyone' ? true : false,
+        }
+      });
     },
   }),
   reduxForm({ form: 'userPreference' }),
