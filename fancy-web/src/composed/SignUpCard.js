@@ -1,8 +1,8 @@
-import * as React from 'react';
 import {
   compose,
   withProps,
 } from 'recompose';
+import { reduxForm } from 'redux-form';
 
 import AuthenticationCard from '../components/AuthenticationCard';
 
@@ -15,5 +15,8 @@ export default compose(
     titleFacebook: 'Join with Facebook',
     titleGooglePlus: 'Google+',
     titleTwitter: 'Twitter',
+  }),
+  reduxForm({
+    form: 'signUp',
   }),
 )(AuthenticationCard);

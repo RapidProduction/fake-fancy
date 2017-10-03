@@ -6,31 +6,40 @@ import {
 } from 'react-apollo';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { createStore} from 'redux';
+import {
+  combineReducers,
+  createStore,
+} from 'redux';
+import { reducer as formReducer } from 'redux-form';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
 import App from './App';
 import './index.css';
 import registerServiceWorker from './registerServiceWorker';
 
+// GraphQL setting up
 const networkInterface = createNetworkInterface({
   uri: 'http://localhost:7001/graphql',
 });
 networkInterface.use([{
-  applyMiddleware(req, next) {
-    if (!req.options.headers) {
-      req.options.headers = {};  // Create the header object if needed.
+  applyMiddleware(request, next) {
+    if (!request.options.headers) {
+      request.options.headers = {};
     }
     // get the authentication token from local storage if it exists
     // const token = localStorage.getItem('token');
-    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjU5ZDEyMzBkMjRhMzI2ZjRmMmI5OGJiNyIsImVtYWlsIjoibWF4N0Bkb21haW4uY29tIiwiaWF0IjoxNTA2OTY5MDMzLCJleHAiOjE1MDY5NzI2MzN9.7461D3-Tb1pQB90fGBP654H7FicuJRJt2aHZX4s52bs';
-    req.options.headers.authorization = token ? `Bearer ${token}` : null;
+    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjU5ZDEyMzBkMjRhMzI2ZjRmMmI5OGJiNyIsImVtYWlsIjoibWF4N0Bkb21haW4uY29tIiwiaWF0IjoxNTA3MDUxNjM5LCJleHAiOjE1MDcwNTUyMzl9.5OcdXq7jTuZSuej1XIUWgOHMqr_5w4eUCKXN9b7wf3E';
+    request.options.headers.authorization = token ? `Bearer ${token}` : null;
     next();
   }
 }]);
 
+// Enhancers
 const client = new ApolloClient({ networkInterface });
-const store = createStore(composeWithDevTools());
+const store = createStore(
+  combineReducers({ form: formReducer }),
+  composeWithDevTools()
+);
 
 ReactDOM.render(
   <ApolloProvider client={client}>
