@@ -7,3 +7,7 @@ export const setAuthenticationToken = (token) => {
 export const getAuthenticationToken = () => {
   return localStorage.getItem(AUTHENTICATION_TOKEN_KEY);
 }
+
+export const revokeSession = () => {
+  localStorage.removeItem(AUTHENTICATION_TOKEN_KEY);
+}

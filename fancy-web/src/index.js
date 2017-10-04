@@ -37,14 +37,14 @@ networkInterface.use([{
 }]);
 
 // Enhancers
-export const apolloClient = new ApolloClient({ networkInterface });
+const graphqlClient = new ApolloClient({ networkInterface });
 const store = createStore(
   combineReducers({ form: formReducer }),
   composeWithDevTools()
 );
 
 ReactDOM.render(
-  <ApolloProvider client={apolloClient}>
+  <ApolloProvider client={graphqlClient}>
     <Provider store={store}>
       <App />
     </Provider>

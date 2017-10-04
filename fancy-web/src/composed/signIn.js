@@ -11,29 +11,24 @@ import { reduxForm } from 'redux-form';
 
 import AuthenticationCard from '../components/AuthenticationCard';
 import { setAuthenticationToken } from '../libs/sessionHandler';
-import { apolloClient } from '../index';
 
-const LOGIN_MUTATION = gql`
-mutation SignInUser(
-  $email: String!
-  $password: String!
-){
-  signInUser(
-    credential: {
-      email: $email
-      password: $password
+const SIGNIN_MUTATION = gql`
+  mutation SignInUser(
+    $email: String!
+    $password: String!
+  ){
+    signInUser(
+      credential: {
+        email: $email
+        password: $password
+      }
+    ) {
+      authenticatedToken
     }
-  ) {
-    authenticatedToken
   }
-}
 `;
 
 export default compose(
-  graphql(
-    LOGIN_MUTATION,
-    { name: 'login' },
-  ),
   withProps({
     authenticatedTitle: 'Log In',
     title: 'Log In',
@@ -41,9 +36,13 @@ export default compose(
     titleGooglePlus: 'Google+',
     titleTwitter: 'Twitter',
   }),
+  graphql(
+    SIGNIN_MUTATION,
+    { name: 'signIn' },
+  ),
   withHandlers({
     onSubmit: props => formValues => {
-      props.login({
+      props.signIn({
         variables: {
           email: formValues.username,
           password: formValues.password,
@@ -60,7 +59,8 @@ export default compose(
         setAuthenticationToken(authenticatedToken);
       })
       .catch(error => {
-        console.log("There is error while logging-in");
+        // TODO: Set the error flash message
+        console.log(`There is error while signing in ${error}`);
       });
     },
   }),
