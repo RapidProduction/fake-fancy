@@ -5,6 +5,8 @@ import {
 import React from 'react';
 import { Field } from 'redux-form';
 
+import './AuthenticationCard.scss';
+
 const AuthenticationCard = ({
   // Props
   authenticatedTitle,
@@ -24,16 +26,34 @@ const AuthenticationCard = ({
   onTwitterClick,
   handleSubmit,
 }) => (
-  <div>
+  <div className='authentication-card__container'>
     <form onSubmit={handleSubmit}>
       <div>{title}</div>
       <div>{titleCaption}</div>
       <div>
-        <button type='button' onClick={onFacebookClick}>{titleFacebook}</button>
+        <button
+          className='authentication-card__container__facbook-button'
+          type='button'
+          onClick={onFacebookClick}
+        >
+          {titleFacebook}
+        </button>
       </div>
       <div>
-        <button type='button' onClick={onGooglePlusClick}>{titleGooglePlus}</button>
-        <button type='button' onClick={onTwitterClick}>{titleTwitter}</button>
+        <button
+          className='authentication-card__container__google-plus-button'
+          type='button'
+          onClick={onGooglePlusClick}
+        >
+          {titleGooglePlus}
+        </button>
+        <button
+        className='authentication-card__container__twitter-button'
+          type='button'
+          onClick={onTwitterClick}
+        >
+          {titleTwitter}
+        </button>
       </div>
       <div>
         <Field

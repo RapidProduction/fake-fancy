@@ -30,9 +30,7 @@ export default compose(
     USER_QUERY,
     { name: 'user' },
   ),
-  withProps({
-    title: 'Fancy',
-  }),
+  withProps({ title: 'Fancy' }),
   withState('isLoggedIn', 'setIsLoggedInState', true),
   mapProps(props => ({
     ...props,

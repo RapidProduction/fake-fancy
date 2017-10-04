@@ -1,0 +1,27 @@
+.authentication-card {
+  &__container {
+    margin: 10px;
+    width: 530px;
+    background: lightblue;
+    border: 1px solid lightblue;
+    border-radius: 6px;
+    font-size: medium;
+    &__facebook-button {
+      display: block;
+      background: -webkit-linear-gradient(top, #5375b1, #446295);
+      border-color: #334d7a #2f4872 #2a4168;
+      font-size: medium;
+    }
+    &__google-plus-button {
+      background: -webkit-linear-gradient(top, #ffffff, #fdfdfd);
+      border-color: #dee1e3;
+      color: #dc4e41;
+      font-size: medium;
+    }
+    &__twitter-button {
+      background: -webkit-linear-gradient(top, #55acee, #51a3e2);
+      text-shadow: 0 -1px 0 #4f8eaf;
+      font-size: medium;
+    }
+  }
+}
