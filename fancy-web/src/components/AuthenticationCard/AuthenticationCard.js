@@ -19,10 +19,10 @@ const AuthenticationCard = ({
   onFacebookClick,
   onGooglePlusClick,
   onTwitterClick,
-  onAuthenticate,
+  handleSubmit,
 }) => (
   <div>
-    <form onSubmit={onAuthenticate}>
+    <form onSubmit={handleSubmit}>
       <div>{title}</div>
       <div>{titleCaption}</div>
       <div>
@@ -49,7 +49,7 @@ const AuthenticationCard = ({
         />
       </div>
       <div>
-        <button onClick={onAuthenticate} disabled={pristine || submitting}>
+        <button type='submit' disabled={pristine || submitting}>
           {authenticatedTitle}
         </button>
       </div>
@@ -79,7 +79,7 @@ AuthenticationCard.propTypes = {
   onFacebookClick: func,
   onGooglePlusClick: func,
   onTwitterClick: func,
-  onAuthenticate: func,
+  handleSubmit: func,
 };
 
 export default AuthenticationCard;

@@ -35,14 +35,14 @@ networkInterface.use([{
 }]);
 
 // Enhancers
-const client = new ApolloClient({ networkInterface });
+export const apolloClient = new ApolloClient({ networkInterface });
 const store = createStore(
   combineReducers({ form: formReducer }),
   composeWithDevTools()
 );
 
 ReactDOM.render(
-  <ApolloProvider client={client}>
+  <ApolloProvider client={apolloClient}>
     <Provider store={store}>
       <App />
     </Provider>

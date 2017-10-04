@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import SignInCard from '../../composed/SignInCard';
+import SignInCard from '../../composed/signIn';
 
 const SignInPage = () => <SignInCard />;
 export default SignInPage;
