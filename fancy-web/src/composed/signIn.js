@@ -1,4 +1,7 @@
-import { gql } from 'react-apollo';
+import {
+  gql,
+  graphql,
+} from 'react-apollo';
 import {
   compose,
   withHandlers,
@@ -8,8 +11,29 @@ import { reduxForm } from 'redux-form';
 
 import AuthenticationCard from '../components/AuthenticationCard';
 import { setAuthenticationToken } from '../libs/sessionHandler';
+import { apolloClient } from '../index';
+
+const LOGIN_MUTATION = gql`
+mutation SignInUser(
+  $email: String!
+  $password: String!
+){
+  signInUser(
+    credential: {
+      email: $email
+      password: $password
+    }
+  ) {
+    authenticatedToken
+  }
+}
+`;
 
 export default compose(
+  graphql(
+    LOGIN_MUTATION,
+    { name: 'login' },
+  ),
   withProps({
     authenticatedTitle: 'Log In',
     title: 'Log In',
@@ -19,23 +43,25 @@ export default compose(
   }),
   withHandlers({
     onSubmit: props => formValues => {
-      const LOGIN_MUTATION = gql`
-        mutation {
-          signInUser(
-            credential: {
-              email: "max8@domain.com"
-              password: "anotherPassword"
+      props.login({
+        variables: {
+          email: formValues.username,
+          password: formValues.password,
+        },
+      })
+      .then(response => {
+        const {
+          data: {
+            signInUser: {
+              authenticatedToken
             }
-          ) {
-            authenticatedToken
           }
-        }
-      `
-      client.query(LOGIN_MUTATION
-      }).then(response => console.log(response.data.allLinks))
-      console.log(formValues);
-      console.log(props.context);
-      setAuthenticationToken(formValues.username);
+        } = response;
+        setAuthenticationToken(authenticatedToken);
+      })
+      .catch(error => {
+        console.log("There is error while logging-in");
+      });
     },
   }),
   reduxForm({ form: 'signIn' }),
