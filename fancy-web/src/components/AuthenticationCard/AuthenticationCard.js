@@ -28,11 +28,11 @@ const AuthenticationCard = ({
 }) => (
   <div className='authentication-card__container'>
     <form onSubmit={handleSubmit}>
-      <div>{title}</div>
-      <div>{titleCaption}</div>
+      <div className='authentication-card__text__title'>{title}</div>
+      <div className='authentication-card__text__description'>{titleCaption}</div>
       <div>
         <button
-          className='authentication-card__container__facbook-button'
+          className='authentication-card__button__facebook'
           type='button'
           onClick={onFacebookClick}
         >
@@ -41,14 +41,14 @@ const AuthenticationCard = ({
       </div>
       <div>
         <button
-          className='authentication-card__container__google-plus-button'
+          className='authentication-card__button__google-plus'
           type='button'
           onClick={onGooglePlusClick}
         >
           {titleGooglePlus}
         </button>
         <button
-        className='authentication-card__container__twitter-button'
+        className='authentication-card__button__twitter'
           type='button'
           onClick={onTwitterClick}
         >
@@ -57,6 +57,7 @@ const AuthenticationCard = ({
       </div>
       <div>
         <Field
+          className='authentication-card__input'
           name='username'
           component='input'
           type='text'
@@ -65,6 +66,7 @@ const AuthenticationCard = ({
       </div>
       <div>
         <Field
+        className='authentication-card__input'
           name='password'
           component='input'
           type='password'
@@ -72,18 +74,32 @@ const AuthenticationCard = ({
         />
       </div>
       <div>
-        <button type='submit' disabled={pristine || submitting}>
+        <button
+          className='authentication-card__button__authenticate'
+          type='submit'
+          disabled={pristine || submitting}
+        >
           {authenticatedTitle}
         </button>
       </div>
       <div>
-        <a>More social networks</a>
+        <a className='authentication-card__text__recommendation'>
+          More social networks
+        </a>
+      </div>
+      <div className='authentication-card__text__description-small'>
+        {descriptionLinkPage}
+        <a
+          className='authentication-card__text__recommendation'
+          href={`/${linkPageUrl}`}
+        >
+          {titleLinkPage}
+        </a>
       </div>
       <div>
-        {descriptionLinkPage}<a href={`/${linkPageUrl}`}>{titleLinkPage}</a>
-      </div>
-      <div>
-        <div>Interested in selling? Get started</div>
+        <div className='authentication-card__text__description-small'>
+          Interested in selling? Get started
+        </div>
         <button>Get started</button>
       </div>
     </form>

@@ -38,7 +38,7 @@ export default compose(
     titleGooglePlus: 'Google+',
     titleTwitter: 'Twitter',
     titleLinkPage: 'Sign up now',
-    descriptionLinkPage: 'New to Fancy?',
+    descriptionLinkPage: 'New to Fancy? ',
     linkPageUrl: 'signup',
   }),
   graphql(
