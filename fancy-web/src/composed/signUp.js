@@ -38,6 +38,9 @@ export default compose(
     titleFacebook: 'Join with Facebook',
     titleGooglePlus: 'Google+',
     titleTwitter: 'Twitter',
+    titleLinkPage: 'Log In',
+    descriptionLinkPage: 'Already on Fancy?',
+    linkPageUrl: '',
   }),
   graphql(
     SIGNUP_MUTATION,
