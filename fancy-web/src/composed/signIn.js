@@ -8,42 +8,46 @@ import {
   withProps,
 } from 'recompose';
 import { reduxForm } from 'redux-form';
+import { withRouter } from 'react-router';
 
 import AuthenticationCard from '../components/AuthenticationCard';
 import { setAuthenticationToken } from '../libs/sessionHandler';
-import { apolloClient } from '../index';
 
-const LOGIN_MUTATION = gql`
-mutation SignInUser(
-  $email: String!
-  $password: String!
-){
-  signInUser(
-    credential: {
-      email: $email
-      password: $password
+const SIGNIN_MUTATION = gql`
+  mutation SignInUser(
+    $email: String!
+    $password: String!
+  ){
+    signInUser(
+      credential: {
+        email: $email
+        password: $password
+      }
+    ) {
+      authenticatedToken
     }
-  ) {
-    authenticatedToken
   }
-}
 `;
 
 export default compose(
-  graphql(
-    LOGIN_MUTATION,
-    { name: 'login' },
-  ),
+  withRouter,
   withProps({
     authenticatedTitle: 'Log In',
     title: 'Log In',
     titleFacebook: 'Log in with Facebook',
     titleGooglePlus: 'Google+',
     titleTwitter: 'Twitter',
+    titleLinkPage: 'Sign up now',
+    descriptionLinkPage: 'New to Fancy?',
+    linkPageUrl: 'signup',
   }),
+  graphql(
+    SIGNIN_MUTATION,
+    { name: 'signIn' },
+  ),
   withHandlers({
     onSubmit: props => formValues => {
-      props.login({
+      props.signIn({
         variables: {
           email: formValues.username,
           password: formValues.password,
@@ -58,9 +62,11 @@ export default compose(
           }
         } = response;
         setAuthenticationToken(authenticatedToken);
+        props.history.push('/user');
       })
       .catch(error => {
-        console.log("There is error while logging-in");
+        // TODO: Set the error flash message
+        console.log(`There is error while signing in ${error}`);
       });
     },
   }),

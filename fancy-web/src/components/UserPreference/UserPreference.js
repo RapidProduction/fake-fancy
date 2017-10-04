@@ -1,4 +1,9 @@
-import * as React from 'react';
+import {
+  bool,
+  func,
+  object,
+} from 'prop-types';
+import React from 'react';
 import { Field } from 'redux-form';
 
 const UserPreference = ({
@@ -158,9 +163,20 @@ const UserPreference = ({
       </div>
     )
   }
+  else if(userPreference.error) {
+    return <div>Please sign in to see your user preference</div>;
+  }
   else {
     return <div>Loading...</div>;
   }
+};
+
+UserPreference.propTypes = {
+  userPreference: object,
+  pristine: bool,
+  submitting: bool,
+  handleSubmit: func,
+  savePreference: func,
 };
 
 export default UserPreference;

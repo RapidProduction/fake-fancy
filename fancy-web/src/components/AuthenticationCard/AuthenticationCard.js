@@ -2,7 +2,7 @@ import {
   string,
   func,
 } from 'prop-types';
-import * as React from 'react';
+import React from 'react';
 import { Field } from 'redux-form';
 
 const AuthenticationCard = ({
@@ -13,6 +13,9 @@ const AuthenticationCard = ({
   titleFacebook,
   titleGooglePlus,
   titleTwitter,
+  titleLinkPage,
+  descriptionLinkPage,
+  linkPageUrl,
   // Form
   pristine, submitting,
   // Events
@@ -26,11 +29,11 @@ const AuthenticationCard = ({
       <div>{title}</div>
       <div>{titleCaption}</div>
       <div>
-        <button onClick={onFacebookClick}>{titleFacebook}</button>
+        <button type='button' onClick={onFacebookClick}>{titleFacebook}</button>
       </div>
       <div>
-        <button onClick={onGooglePlusClick}>{titleGooglePlus}</button>
-        <button onClick={onTwitterClick}>{titleTwitter}</button>
+        <button type='button' onClick={onGooglePlusClick}>{titleGooglePlus}</button>
+        <button type='button' onClick={onTwitterClick}>{titleTwitter}</button>
       </div>
       <div>
         <Field
@@ -57,7 +60,7 @@ const AuthenticationCard = ({
         <a>More social networks</a>
       </div>
       <div>
-        New to Fancy? <a href='/signup'>Sign up now</a>
+        {descriptionLinkPage}<a href={`/${linkPageUrl}`}>{titleLinkPage}</a>
       </div>
       <div>
         <div>Interested in selling? Get started</div>
@@ -75,6 +78,9 @@ AuthenticationCard.propTypes = {
   titleFacebook: string,
   titleGooglePlus: string,
   titleTwitter: string,
+  titleLinkPage: string,
+  descriptionLinkPage: string,
+  linkPageUrl: string,
   // Handlers
   onFacebookClick: func,
   onGooglePlusClick: func,
