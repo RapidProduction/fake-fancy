@@ -3,6 +3,7 @@ const {
   graphiqlExpress,
 } = require('apollo-server-express');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 const express = require('express');
 const passport = require('passport');
 const session = require('express-session');
@@ -21,7 +22,11 @@ const mongo = require('mongodb');
 
 const startServer = async () => {
   const PORT = 7001;
-  const app = express();
+  const corsOptions = {
+    origin: 'http://localhost:7002',
+    credentials: true,
+  };
+
   const mongoConnector = await connectMongoDb();
   const builtOptions = async (request) => {
     // TODO: This should find by Id not email, we assume email is unique
@@ -37,6 +42,8 @@ const startServer = async () => {
   };
   setupPassportStrategies(mongoConnector.User);
 
+  const app = express();
+  app.use(cors(corsOptions));
   app.use(bodyParser.urlencoded({ extended: true }));
   app.use(passport.initialize());
   app.use(passport.session());
