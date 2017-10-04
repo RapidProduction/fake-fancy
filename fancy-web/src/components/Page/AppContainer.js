@@ -4,12 +4,13 @@ import {
   Route,
 } from 'react-router-dom';
 
+import TopPanel from '../../composed/fancyTopPanel';
 import routes from '../../routes';
 
 const AppContainer = () => (
   <Router>
     <div>
-      <div>FANCY</div>
+      <TopPanel />
       {
         routes.map(({ path, component }) =>
           <Route exact key={path} path={path} component={component}/>

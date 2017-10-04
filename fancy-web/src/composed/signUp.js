@@ -8,6 +8,7 @@ import {
   withProps,
 } from 'recompose';
 import { reduxForm } from 'redux-form';
+import { withRouter } from 'react-router';
 
 import AuthenticationCard from '../components/AuthenticationCard';
 import { revokeSession } from '../libs/sessionHandler';
@@ -30,6 +31,7 @@ const SIGNUP_MUTATION = gql`
 `;
 
 export default compose(
+  withRouter,
   withProps({
     authenticatedTitle: 'Join Fancy',
     titleCaption: 'Fancy is the place to discover ' +
@@ -55,16 +57,8 @@ export default compose(
           password: formValues.password,
         },
       })
-      .then(response => {
-        const {
-          data: {
-            signUpUser: {
-              _id: id,
-              email,
-            }
-          }
-        } = response;
-        console.log(id + " " + email);
+      .then(_ => {
+        props.history.push('/');
       })
       .catch(error => {
         // TODO: Set the error flash message

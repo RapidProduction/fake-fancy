@@ -1,6 +1,6 @@
 import SignInPage from './components/Page/SignInPage';
 import SignUpPage from './components/Page/SignUpPage';
-import UserPreferencePage from './components/Page/UserPreferencePage';
+import MenuListContainer from './composed/menuListContainer';
 
 const routes = [
   { path: '/',
@@ -10,7 +10,7 @@ const routes = [
     component: SignUpPage,
   },
   { path: '/user',
-    component: UserPreferencePage,
+    component: MenuListContainer,
   }
 ]
 

@@ -8,6 +8,7 @@ import {
    withHandlers,
 } from 'recompose';
  import { reduxForm } from 'redux-form';
+ import { withRouter } from 'react-router';
 
 import UserPreference from '../components/UserPreference';
 
@@ -65,6 +66,7 @@ const USER_PREFERENCE_UPDATE = gql`
 `;
 
 export default compose(
+  withRouter,
   graphql(
     USER_PREFERENCE_QUERY,
     { name: 'userPreference' },

@@ -8,6 +8,7 @@ import {
   withProps,
 } from 'recompose';
 import { reduxForm } from 'redux-form';
+import { withRouter } from 'react-router';
 
 import AuthenticationCard from '../components/AuthenticationCard';
 import { setAuthenticationToken } from '../libs/sessionHandler';
@@ -29,6 +30,7 @@ const SIGNIN_MUTATION = gql`
 `;
 
 export default compose(
+  withRouter,
   withProps({
     authenticatedTitle: 'Log In',
     title: 'Log In',
@@ -60,6 +62,7 @@ export default compose(
           }
         } = response;
         setAuthenticationToken(authenticatedToken);
+        props.history.push('/user');
       })
       .catch(error => {
         // TODO: Set the error flash message
